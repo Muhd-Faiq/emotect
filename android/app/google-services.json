@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "320810667456",
+    "firebase_url": "https://emotect-bd3d5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "emotect-bd3d5",
+    "storage_bucket": "emotect-bd3d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320810667456:android:498c2f800279862d9dcc25",
+        "android_client_info": {
+          "package_name": "com.example.emotect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320810667456-2smtogbjuc04c3mdv14d173g3opneo3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5btcM3ZWO_YtqjfsO4lYfBoOF0faybCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320810667456-2smtogbjuc04c3mdv14d173g3opneo3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
