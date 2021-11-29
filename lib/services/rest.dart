@@ -41,7 +41,7 @@ class RestService {
 
     if (_session != null) {
       //_session != null if enableSession is True
-
+      print("have session");
       final token = await _session.getToken();
 
       if (token != null) {

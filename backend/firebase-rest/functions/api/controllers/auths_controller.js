@@ -22,8 +22,8 @@ class AuthsController {
         // Sign up controller
         this.router.post('/signup', async (req, res, next) => {
             try {
-                const { email, password,displayName } = req.body
-                const result = await this.model.signup(email, password,displayName)
+                const { email, password } = req.body
+                const result = await this.model.signup(email, password)
                 if (!result) return res.sendStatus(400)
                 return res.status(201).json(result)
             } catch (e) {
@@ -107,11 +107,11 @@ async function verifyUserCanAccessResource(req, res, next) {
     try {
         const authModel = require('../models/auth_model')
 
-        //_log('auths_controller.js > verifyUserCanAccessResource > 1: ', {authModel, req} )
+        _log('auths_controller.js > verifyUserCanAccessResource > 1: ', {authModel, req} )
 
         const verifiedToken = await authModel.verifyHTTPUserCanAccessResource(req)
 
-        //_log('auths_controller.js > verifyUserCanAccessResource > 2: ', {verifiedToken} )
+        _log('auths_controller.js > verifyUserCanAccessResource > 2: ', {verifiedToken} )
 
         if (verifiedToken) {
             req.user = verifiedToken // To pass the token the next middleware

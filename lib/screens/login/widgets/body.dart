@@ -26,38 +26,54 @@ class Body extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Text(
-                    'SmartMath',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 50,
-                    ),
-                  ),
-                  Text(
-                    'Get Started With Your Study',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: 16,
+                height: 50,
+              ),
+              Image.asset('assets/images/Emotect_200.png'),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Login',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 37,
+                ),
+              ),
+              // Column(
+              //   children: [
+              //     SizedBox(
+              //       height: 200,
+              //     ),
+              //     Text(
+              //       'Login',
+              //       textAlign: TextAlign.center,
+              //       style: const TextStyle(
+              //         fontWeight: FontWeight.bold,
+              //         fontSize: 37,
+              //       ),
+              //     ),
+              //     Text(
+              //       'Get Started With Emotion Detection',
+              //       textAlign: TextAlign.center,
+              //       style: const TextStyle(
+              //         fontWeight: FontWeight.bold,
+              //         fontSize: 20,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              SizedBox(
+                height: 50,
               ),
               Column(
                 children: [
                   Container(
                     width: 350,
                     child: _buildTextField(
-                      hint: 'Username',
+                      context: context,
+                      hint: 'Email',
                       icon: Icons.people,
                       onChanged: (value) => viewmodel.username = value,
                     ),
@@ -68,6 +84,7 @@ class Body extends StatelessWidget {
                   Container(
                     width: 350,
                     child: _buildTextField(
+                      context: context,
                       hint: 'Password',
                       isObsecure: !viewmodel.showPassword,
                       icon: Icons.lock,
@@ -84,7 +101,7 @@ class Body extends StatelessWidget {
                       style: TextStyle(color: Colors.red, fontSize: 20.0),
                     ),
                   SizedBox(
-                    height: 10.0,
+                    height: 30.0,
                   ),
                   _buildButtons(context, viewmodel),
                   SizedBox(
@@ -126,17 +143,23 @@ class Body extends StatelessWidget {
     );
   }
 
-  TextField _buildTextField(
-      {hint, icon, isObsecure = false, button, onChanged}) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hint,
-        prefixIcon: icon != null ? Icon(icon) : null,
-        suffixIcon: button,
-        border: OutlineInputBorder(),
+  Theme _buildTextField(
+      {context, hint, icon, isObsecure = false, button, onChanged}) {
+    return Theme(
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: hint,
+          prefixIcon: icon != null ? Icon(icon) : null,
+          suffixIcon: button,
+          border: OutlineInputBorder(),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.orange, width: 2.0),
+          ),
+        ),
+        obscureText: isObsecure,
+        onChanged: onChanged,
       ),
-      obscureText: isObsecure,
-      onChanged: onChanged,
+      data: Theme.of(context).copyWith(primaryColor: Colors.orange),
     );
   }
 
@@ -145,11 +168,17 @@ class Body extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          ),
           child: Text('Log in'),
           onPressed: () => _onLogin(context, viewmodel),
         ),
         SizedBox(width: 10.0),
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          ),
           child: Text('Cancel'),
           onPressed: () => _onCancel(context, viewmodel),
         ),

@@ -31,6 +31,7 @@ class UnsignedInBar extends Bar {
                   fontSize: 50,
                 ),
               ),
+              Image.asset('assets/images/Emotect_200.png'),
               Text(
                 'Detect Your Emotion',
                 textAlign: TextAlign.center,

@@ -4,11 +4,13 @@ import 'package:get_it/get_it.dart';
 import '../services/rest.dart';
 
 import '../services/auth/auth_service.dart';
+import '../services/user/user_service.dart';
 
 // import '../services/auth/auth_service_rest.dart';
 // import '../services/counter/counter_service_rest.dart';
 
 import '../services/auth/auth_service_secured_rest.dart';
+import '../services/user/user_service_rest.dart';
 
 // import '../services/auth/auth_service_mock.dart';
 // import '../services/counter/counter_service_mock.dart';
@@ -28,6 +30,7 @@ void init() {
   );
 
   dependency.registerLazySingleton<AuthService>(() => AuthServiceSecuredRest());
+  dependency.registerLazySingleton<UserService>(() => UserServiceRest());
 
   // dependency.registerLazySingleton<CounterService>(() => CounterServiceRest());
   // dependency.registerLazySingleton<AuthService>(() => AuthServiceRest());

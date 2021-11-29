@@ -1,9 +1,9 @@
 // @dart=2.9
 import 'package:emotect/screens/viewmodel.dart';
 
-import '../../app/dependencies.dart';
-import '../../services/auth/auth_service.dart';
-import '../../models/user.dart';
+import '../app/dependencies.dart';
+import '../services/auth/auth_service.dart';
+import '../models/user.dart';
 
 class UserViewmodel extends Viewmodel {
   AuthService get _service => dependency();

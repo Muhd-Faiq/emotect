@@ -7,16 +7,26 @@
 // Update: 4 Jun 2021
 
 'use strict'
-const express = require('express')
+const _log = require('firebase-functions').logger.log
+
+const _express = require('express')
+const {verifyUserCanAccessResource, verifyAdminAccess} = require('./auths_controller')
 
 class Controller {
     constructor(model) {
         this.model = model
-        this.router = express.Router()
+        this.router = _express.Router()
+        
+
+        // User can only access his/her document
+        this.router.use('/:id',verifyUserCanAccessResource)
 
         // Get all Counter documents
-        this.router.get('/', async (req, res, next) => {
+        // Attached with verifyAdminAccess middleware, so that only admin can access ALL documents
+        this.router.get('/', verifyAdminAccess, async (req, res, next) => {
             try {
+                // _log('req.user', req.user)
+                
                 const result = await this.model.queryDocumentList(req.query)
                 return res.json(result)
             }
@@ -28,6 +38,7 @@ class Controller {
         // Get one Counter document
         this.router.get('/:id', async (req, res, next) => {
             try {
+                _log('req.params.id2', req.params.id)
                 const result = await this.model.getDocument(req.params.id)
                 if (!result) return res.sendStatus(404)
                 return res.json(result)
@@ -41,17 +52,6 @@ class Controller {
         this.router.post('/', async (req, res, next) => {
             try {
                 const result = await this.model.createDocument(req.body)
-                if (!result) return res.sendStatus(409)
-                return res.status(201).json(result)
-            }
-            catch (e) {
-                return next(e)
-            }
-        })
-        // Create / add a new Counter document with custom id
-        this.router.post('/:id', async (req, res, next) => {
-            try {
-                const result = await this.model.createDocument(req.body,req.params.id)
                 if (!result) return res.sendStatus(409)
                 return res.status(201).json(result)
             }

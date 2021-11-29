@@ -1,11 +1,13 @@
 // @dart=2.9
 import '../../app/dependencies.dart';
 import '../../services/auth/auth_service.dart';
+import '../../services/user/user_service.dart';
 import '../../models/user.dart';
 import '../viewmodel.dart';
 
 class RegisterViewmodel extends Viewmodel {
   AuthService get _service => dependency();
+  UserService get _userservice => dependency();
   User _user = User();
   // bool _showPassword = false;
   bool _showErrorMessage = false;
@@ -71,8 +73,24 @@ class RegisterViewmodel extends Viewmodel {
         password: user.password,
       ),
     );
+    if (result == null) {
+      _showErrorMessage = true;
+      return null;
+    }
+    turnIdle();
+    return result;
+  }
+
+  Future<User> createUserProfile(User _user) async {
+    turnBusy();
+    print("Yes");
+    final result = await _userservice.createUserProfile(
+      userID: _user.id,
+      role: "user",
+      name: _user.name,
+    );
     if (result == null) _showErrorMessage = true;
     turnIdle();
-    return _user;
+    return result;
   }
 }

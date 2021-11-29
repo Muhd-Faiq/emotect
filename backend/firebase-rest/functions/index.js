@@ -10,12 +10,12 @@ const app = express();
 const usersRouter = require('./api/controllers/users_controller')
 // const countersRouter = require('./api/controllers/counters_controller')
 
-const {authsRouter, verifyAccessToken} = require('./api/controllers/auths_controller')
+const {authsRouter, verifyAccessToken,verifyUserCanAccessResource,verifyAdminAccess} = require('./api/controllers/auths_controller')
 
 app.use(express.json())
 app.use('/auths', authsRouter)
 
-app.use('/users', verifyAccessToken, usersRouter)
+app.use('/users', verifyAccessToken,verifyUserCanAccessResource, usersRouter)
 // app.use('/counters', verifyAccessToken, countersRouter)
 
 

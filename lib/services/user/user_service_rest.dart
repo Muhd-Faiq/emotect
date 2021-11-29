@@ -11,6 +11,7 @@ class UserServiceRest implements UserService {
   Future<User> createUserProfile(
       {String userID, String role, String name}) async {
     try {
+      print(userID + name + role);
       final json =
           await rest.post('users/$userID', data: {'name': name, 'role': role});
 

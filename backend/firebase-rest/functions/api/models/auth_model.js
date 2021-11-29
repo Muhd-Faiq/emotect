@@ -1,3 +1,8 @@
+// Author: Jumail
+// Email: jumail@utm.my
+// Github:  github.com/jumail-utm
+// Update: 8 Jun 2021
+
 'use strict'
 
 const _functions = require('firebase-functions')
@@ -46,20 +51,11 @@ class AuthModel {
         }
     }
 
-    async _sign(endpoint, username, password,displayName) {
-        if(displayName==null)
-        {
-            return this._post(endpoint, {
+    async _sign(endpoint, username, password) {
+        return this._post(endpoint, {
             'email': username,
             'password': password
-        })}
-        else{
-            return this._post(endpoint, {
-                'email': username,
-                'password': password,
-                'displayName':displayName
-            })
-        }
+        })
     }
 
     // async _sign(endpoint, username, password) {
@@ -112,8 +108,8 @@ class AuthModel {
     //     }
     // }
 
-    async signup(username, password,displayName) {
-        return this._sign('signUp', username, password,displayName)
+    async signup(username, password) {
+        return this._sign('signUp', username, password)
     }
 
     async signin(username, password) {
@@ -197,28 +193,32 @@ class AuthModel {
     }
 
     async verifyHTTPUserAccess(httpRequest, fn) {
+        _log('auths_models.js > verifyHTTPUserAccess: ', {  })
         if (!httpRequest) return null
         if (!fn) return null
 
         const decodedToken = await this.verifyHTTPToken(httpRequest)
 
-        //_log('auths_models.js > verifyHTTPUserAccess: ', { decodedToken, httpRequest })
+        _log('auths_models.js > verifyHTTPUserAccess: ', { decodedToken, httpRequest })
 
         if (!decodedToken) return null
         return fn(httpRequest, decodedToken)
     }
 
     async verifyHTTPUserCanAccessResource(httpRequest) {
+        _log('auths_model.js > verifyHTTPUserCanAccessResource: 1', {  })
+        if (!httpRequest ) return null
+        //|| !httpRequest.params || !httpRequest.params.id
+        if(!httpRequest.params) _log('auths_model.js > verifyHTTPUserCanAccessResource: no !httpRequest.params', {  })
+        if(!httpRequest.params.id) _log('auths_model.js > verifyHTTPUserCanAccessResource: no !httpRequest.params.id', {  })
 
-        if (!httpRequest || !httpRequest.params || !httpRequest.params.id) return null
-
-        //_log('auths_model.js > verifyHTTPUserCanAccessResource: ', { httpRequest })
+        _log('auths_model.js > verifyHTTPUserCanAccessResource: 2', { httpRequest })
 
         const fn = async (req, decodedToken) => {
             if (!decodedToken) return null
             const authUserId = decodedToken.user_id  // The token should contain the authenticated user id
             const claimUserId = req.params.id   // 
-            //_log('auths_model.js > verifyHTTPUserCanAccessResource > fn:  ', { authUserId, claimUserId, req, token: decodedToken })
+            _log('auths_model.js > verifyHTTPUserCanAccessResource > fn:  ', { authUserId, claimUserId, req, token: decodedToken })
             if (claimUserId === authUserId) return decodedToken
             return null
         }

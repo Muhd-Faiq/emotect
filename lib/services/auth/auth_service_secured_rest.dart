@@ -41,6 +41,10 @@ class AuthServiceSecuredRest implements AuthService {
     });
     if (json == null || json.length == 0) return null;
 
+    json['id'] = json['localId'];
+    json['name'] = json['displayName'];
+    json['photoUrl'] = json['profilePicture'];
+    rest.openSession(json['idToken']);
     final _user = User.fromJson(json);
     return _user;
   }

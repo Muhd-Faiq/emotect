@@ -9,7 +9,13 @@ class Body extends StatelessWidget {
     final User _user = await viewmodel.register();
 
     // if (_user != null) Navigator.pop(context, _user);
-    if (_user != null) Navigator.pushNamed(context, '/login');
+    // if (_user != null) Navigator.pushNamed(context, '/login');
+    if (_user != null) {
+      print(_user.name);
+      final User _user2 = await viewmodel.createUserProfile(_user);
+      // if (_user2 != null) Navigator.pushNamed(context, '/login');
+      if (_user2 != null) Navigator.pop(context);
+    }
   }
 
   @override
@@ -31,23 +37,25 @@ class Body extends StatelessWidget {
                 SizedBox(
                   width: 50,
                 ),
-                // Container(
-                //   width: 55,
-                //   height: 55,
-                //   child: Column(
-                //     children: [
-                //       Image.asset('assets/image/blackboard.png'),
-                //     ],
-                //   ),
-                // ),
+                Container(
+                  width: 55,
+                  height: 55,
+                  child: Column(
+                    children: [
+                      Image.asset('assets/images/Emotect_200.png'),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   width: 16,
                 ),
                 Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'SmartMath',
-                      textAlign: TextAlign.center,
+                      'Emotect',
+                      textAlign: TextAlign.start,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -55,7 +63,7 @@ class Body extends StatelessWidget {
                     ),
                     Text(
                       'Create New Account',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       style: const TextStyle(
                         fontSize: 18,
                       ),
@@ -70,6 +78,7 @@ class Body extends StatelessWidget {
             Container(
               width: 350,
               child: _buildTextField(
+                context: context,
                 hint: 'Name',
                 icon: Icons.people,
                 onChanged: (value) => viewmodel.name = value,
@@ -81,6 +90,7 @@ class Body extends StatelessWidget {
             Container(
               width: 350,
               child: _buildTextField(
+                context: context,
                 hint: 'Email',
                 icon: Icons.email,
                 onChanged: (value) => viewmodel.login = value,
@@ -92,6 +102,7 @@ class Body extends StatelessWidget {
             Container(
               width: 350,
               child: _buildTextField(
+                context: context,
                 hint: 'Password',
                 icon: Icons.lock,
                 onChanged: (value) => viewmodel.password = value,
@@ -103,9 +114,10 @@ class Body extends StatelessWidget {
             Container(
               width: 350,
               child: _buildTextField(
+                context: context,
                 hint: 'Confirm Password',
                 icon: Icons.lock,
-                onChanged: (value) => viewmodel.username = value,
+                onChanged: (value) => viewmodel.password = value,
               ),
             ),
             SizedBox(
@@ -118,17 +130,20 @@ class Body extends StatelessWidget {
     );
   }
 
-  TextField _buildTextField(
-      {hint, icon, isObsecure = false, button, onChanged}) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hint,
-        prefixIcon: icon != null ? Icon(icon) : null,
-        suffixIcon: button,
-        border: OutlineInputBorder(),
+  Theme _buildTextField(
+      {context, hint, icon, isObsecure = false, button, onChanged}) {
+    return Theme(
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: hint,
+          prefixIcon: icon != null ? Icon(icon) : null,
+          suffixIcon: button,
+          border: OutlineInputBorder(),
+        ),
+        obscureText: isObsecure,
+        onChanged: onChanged,
       ),
-      obscureText: isObsecure,
-      onChanged: onChanged,
+      data: Theme.of(context).copyWith(primaryColor: Colors.orange),
     );
   }
 
