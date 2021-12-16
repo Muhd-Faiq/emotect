@@ -17,7 +17,7 @@ const _EMPTY_LIST = []
 //        That means, for authentication model, it should not be
 //        extended from this class because Auth model does not use
 //        Firestore service, but instead the Authentication service  
-
+const _log = require('firebase-functions').logger.log
 class Model {
 
     constructor(collectionName) {

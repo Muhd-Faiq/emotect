@@ -1,10 +1,7 @@
 // File:  firebase_admin.js
 // Purpose: Define a singletion wrapper class to initialize Firebase Admin SDK
 // 
-// Author: Jumail 
-// Email: jumail@utm.my
-// Github:  github.com/jumail-utm
-// Update: 4 Jun 2021
+
 
 'use strict'
 

@@ -148,7 +148,7 @@ class AuthModel {
         const authorization = req.headers.authorization
         if (!(authorization.startsWith('Bearer '))) return null
 
-        //_log('auths_models.js > _readTokenFromHTTPRequest: ', { req, authorization })
+        _log('auths_models.js > _readTokenFromHTTPRequest: ', { req, authorization })
 
         return authorization.split('Bearer ')[1]
     }
@@ -159,14 +159,27 @@ class AuthModel {
 
     async verifyToken(accessToken) {
         try {
+            _log('auths_models.js > verifyToken12: ', { accessToken, auth: this.auth })
+            // await this.auth.signInWithCustomToken(this.auth, accessToken)
+            // .then(async (userCredential) => {
+            //     // Signed in
+            //     const user = userCredential.user;
+            //     const decodedToken = await this.auth.verifyIdToken(user)
+            //     // ...
+            // })
+            // .catch((error) => {
+            //     const errorCode = error.code;
+            //     const errorMessage = error.message;
+            //     // ...
+            // });
             const decodedToken = await this.auth.verifyIdToken(accessToken)
 
-            //_log('auths_models.js > verifyToken: ', { accessToken, decodedToken, auth: this.auth })
+            _log('auths_models.js > verifyToken: ', { accessToken, decodedToken, auth: this.auth })
 
             return decodedToken
         }
         catch (e) {
-            //_log('auth_model.js > error** ', e)
+            _log('auth_model.js > error** ', e)
             return null
         }
     }
@@ -186,7 +199,7 @@ class AuthModel {
     async verifyHTTPToken(httpRequest) {
         const accessToken = this._readTokenFromHTTPRequest(httpRequest)
 
-        //_log('auths_models.js > verifyHTTPToken: ', { httpRequest, accessToken })
+        _log('auths_models.js > verifyHTTPToken: ', { httpRequest, accessToken })
 
         if (!accessToken) return null
         return this.verifyToken(accessToken) // return is a decoded token

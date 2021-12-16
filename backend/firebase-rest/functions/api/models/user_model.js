@@ -15,6 +15,7 @@ class UserModel extends Model {
         if (this.instance) return this.instance
         UserModel.instance = this
     }
+    
 }
 
 module.exports = new UserModel()

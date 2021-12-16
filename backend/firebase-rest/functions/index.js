@@ -1,7 +1,4 @@
-// Author: Jumail 
-// Email: jumail@utm.my
-// Github:  github.com/jumail-utm
-// Update: 4 Jun 2021
+
 
 'use strict'
 const functions = require("firebase-functions")
@@ -15,7 +12,7 @@ const {authsRouter, verifyAccessToken,verifyUserCanAccessResource,verifyAdminAcc
 app.use(express.json())
 app.use('/auths', authsRouter)
 
-app.use('/users', verifyAccessToken,verifyUserCanAccessResource, usersRouter)
+app.use('/users', usersRouter)
 // app.use('/counters', verifyAccessToken, countersRouter)
 
 

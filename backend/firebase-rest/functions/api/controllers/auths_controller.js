@@ -1,4 +1,4 @@
-// Author: Jumail 
+
 // Email: jumail@utm.my
 // Github:  github.com/jumail-utm
 // Update: 9 Jun 2021
@@ -17,7 +17,7 @@ class AuthsController {
         if (this.instance) return this.instance
         AuthsController.instance = this
         this.model = require('../models/auth_model')
-        this.router = _express.Router()
+        this.router = _express.Router({ mergeParams: true })
 
         // Sign up controller
         this.router.post('/signup', async (req, res, next) => {
@@ -85,8 +85,8 @@ async function verifyAccessToken(req, res, next) {
     try {
         const authModel = require('../models/auth_model')
         const verifiedToken = await authModel.verifyHTTPToken(req)
-
-        //_log('auths_controller.js > verifyAccessToken: ', {authModel, req} )
+        
+        _log('auths_controller.js > verifyAccessToken: ', {authModel, req} )
 
         if (verifiedToken) {
             req.user = verifiedToken // To pass the token the next middleware
