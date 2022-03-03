@@ -15,21 +15,23 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: CircleAvatar(
-        child: Text(
-          _title[0].toUpperCase(),
-        ),
-      ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Emotect'),
-          Text(
-            _title,
-            style: TextStyle(fontSize: 12.0),
-          ),
-        ],
-      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      // leading: CircleAvatar(
+      //   child: Text(
+      //     _title[0].toUpperCase(),
+      //   ),
+      // ),
+      // title: Column(
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: [
+      //     Text('Emotect'),
+      //     Text(
+      //       _title,
+      //       style: TextStyle(fontSize: 12.0),
+      //     ),
+      //   ],
+      // ),
       actions: [_button],
     );
   }

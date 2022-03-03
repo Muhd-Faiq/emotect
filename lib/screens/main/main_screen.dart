@@ -6,6 +6,7 @@ import 'widgets/body.dart';
 import 'widgets/bar/signed_in_bar.dart';
 import 'widgets/bar/unsigned_in_bar.dart';
 import 'widgets/float.dart';
+import 'widgets/bottombar.dart';
 import '../view.dart';
 import 'main_viewmodel.dart';
 
@@ -21,9 +22,11 @@ class MainScreen extends StatelessWidget {
           builder: (_, mainViewmodel, __) {
             if (mainViewmodel.isUserSignedIn) {
               return Scaffold(
+                extendBodyBehindAppBar: true,
                 appBar: SignedInBar(mainViewmodel),
                 body: Body(),
-                floatingActionButton: Float(),
+                bottomNavigationBar: BottomBar(),
+                // floatingActionButton: Float(),
               );
             }
 
