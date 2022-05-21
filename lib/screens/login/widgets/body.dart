@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../models/user.dart';
 import '../../view.dart';
 import '../login_viewmodel.dart';
+import '../../main/main_viewmodel.dart';
 
 class Body extends StatelessWidget {
   void _onLogin(BuildContext context, LoginViewmodel viewmodel) async {
     final User _user = await viewmodel.authenticate();
     if (_user != null) Navigator.pop(context, _user);
+    // if (_user != null) {
+    //   final res = await MainViewmodel().getAllEmotions();
+    //   if (res != null) {
+    //     Navigator.pop(context, _user);
+    //   }
+    // }
     // if (_user != null) Navigator.pushNamed(context, '/main', arguments: _user);
   }
 

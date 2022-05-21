@@ -5,6 +5,7 @@ class User {
   // String _photoUrl;
   String _login;
   String _password;
+  String _token;
   String _role;
 
   // ignore: unnecessary_getters_setters
@@ -24,6 +25,9 @@ class User {
   get password => _password;
   set password(value) => _password = value;
 
+  get token => _token;
+  set token(value) => _token = value;
+
   get role => _role;
   set role(value) => _role = value;
 
@@ -33,13 +37,16 @@ class User {
       // String photoUrl = '',
       String login = '',
       String password = '',
+      String token = '',
       String role = ''})
       : _id = id,
         _name = name,
         // _photoUrl = photoUrl,
         _login = login,
         _password = password,
+        _token = token,
         _role = role;
+
   User.copy(User from)
       : this(
             id: from.id,
@@ -47,6 +54,7 @@ class User {
             // photoUrl: from.photoUrl,
             login: from.login,
             password: from.password,
+            token: from.token,
             role: from.role);
 
   User.fromJson(Map<String, dynamic> json)
@@ -56,6 +64,7 @@ class User {
           // photoUrl: json['photoUrl'],
           login: json['login'],
           password: json['password'],
+          token: json['token'],
           role: json['role'],
         );
 
@@ -65,6 +74,7 @@ class User {
         // 'photoUrl': photoUrl,
         'login': login,
         'password': password,
+        'token': token,
         'role': role
       };
 }

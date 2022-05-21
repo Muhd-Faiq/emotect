@@ -16,6 +16,8 @@ import '../services/emotions/emotions_service_rest.dart';
 
 import '../services/emotionviewmodel.dart';
 import '../services/listemotionviewmodel.dart';
+import '../services/dataPieChartviewmodel.dart';
+import '../services/session_service.dart';
 
 // import '../services/auth/auth_service_mock.dart';
 // import '../services/counter/counter_service_mock.dart';
@@ -48,4 +50,6 @@ void init() {
   dependency.registerLazySingleton(() => UserViewmodel());
   dependency.registerLazySingleton(() => EmotionsViewmodel());
   dependency.registerLazySingleton(() => ListEmotionsViewmodel());
+  dependency.registerLazySingleton(() => DataPieChartViewmodel());
+  dependency.registerLazySingleton(() => SessionService());
 }

@@ -3,6 +3,7 @@ import '../../app/dependencies.dart';
 import '../../models/user.dart';
 import '../rest.dart';
 import 'auth_service.dart';
+import 'dart:convert';
 
 class AuthServiceSecuredRest implements AuthService {
   RestService get rest => dependency();
@@ -13,20 +14,18 @@ class AuthServiceSecuredRest implements AuthService {
       print('password==$password');
       final json = await rest
           .post('auths/signin', data: {'email': login, 'password': password});
-      print('asdasd');
       if (json == null) return null;
-      print("asdasd");
       // Pre-process json data to comply with the field of the User model
       json['id'] = json['localId'];
       json['name'] = json['displayName'];
       json['photoUrl'] = json['profilePicture'];
-      print("asdasd");
+      json['token'] = json['idToken'];
       print(json['id']);
+
       // Get the access token and let the rest object stores that
       rest.openSession(json['idToken']);
 
       final _user = User.fromJson(json);
-      print("_user2");
       return _user;
     } catch (e) {
       return null;

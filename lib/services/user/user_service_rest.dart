@@ -22,6 +22,15 @@ class UserServiceRest implements UserService {
       json['name'] = json['displayName'];
       json['photoUrl'] = json['profilePicture'];
 
+      if (json.containsKey('admin')) {
+        json['role'] = true;
+        print("json");
+        print(json);
+      } else {
+        print("json2");
+        print(json);
+      }
+
       // Get the access token and let the rest object stores that
       rest.openSession(json['idToken']);
 

@@ -3,8 +3,8 @@ import 'body_center_container.dart';
 import 'pie_chart.dart';
 
 class Body extends StatelessWidget {
-  // final CounterViewmodel _viewmodel;
-  // const Body(CounterViewmodel viewmodel) : _viewmodel = viewmodel;
+  // final Map<String, double> _data;
+  // const Body(Map<String, double> data) : _data = data;
 
   @override
   Widget build(BuildContext context) {

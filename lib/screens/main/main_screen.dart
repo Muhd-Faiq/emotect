@@ -9,9 +9,13 @@ import 'widgets/float.dart';
 import 'widgets/bottombar.dart';
 import '../view.dart';
 import 'main_viewmodel.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+import '../../services/session_service.dart';
+import '../../app/dependencies.dart';
 
 class MainScreen extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (context) => MainScreen());
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -21,13 +25,31 @@ class MainScreen extends StatelessWidget {
           viewmodel: MainViewmodel(),
           builder: (_, mainViewmodel, __) {
             if (mainViewmodel.isUserSignedIn) {
-              return Scaffold(
-                extendBodyBehindAppBar: true,
-                appBar: SignedInBar(mainViewmodel),
-                body: Body(),
-                bottomNavigationBar: BottomBar(),
-                // floatingActionButton: Float(),
-              );
+              //update admin role
+              Map<String, dynamic> decodedToken =
+                  Jwt.parseJwt(MainViewmodel().user.token);
+              if (decodedToken.containsKey('admin')) {
+                MainViewmodel().user.role = "admin";
+              } else {
+                MainViewmodel().user.role = "notadmin";
+              }
+              //
+
+              if (mainViewmodel.user.role == "admin") {
+                return Scaffold(
+                  extendBodyBehindAppBar: true,
+                  appBar: SignedInBar(mainViewmodel),
+                  body: Body(),
+                  bottomNavigationBar: BottomBar(),
+                  floatingActionButton: Float(),
+                );
+              } else {
+                return Scaffold(
+                    extendBodyBehindAppBar: true,
+                    appBar: SignedInBar(mainViewmodel),
+                    body: Body(),
+                    bottomNavigationBar: BottomBar());
+              }
             }
 
             return Scaffold(body: UnsignedInBar(mainViewmodel));
