@@ -5,12 +5,17 @@ import '../services/rest.dart';
 
 import '../services/auth/auth_service.dart';
 import '../services/user/user_service.dart';
+import '../services/emotions/emotions_service.dart';
 
 // import '../services/auth/auth_service_rest.dart';
 // import '../services/counter/counter_service_rest.dart';
 
 import '../services/auth/auth_service_secured_rest.dart';
 import '../services/user/user_service_rest.dart';
+import '../services/emotions/emotions_service_rest.dart';
+
+import '../services/emotionviewmodel.dart';
+import '../services/listemotionviewmodel.dart';
 
 // import '../services/auth/auth_service_mock.dart';
 // import '../services/counter/counter_service_mock.dart';
@@ -31,6 +36,8 @@ void init() {
 
   dependency.registerLazySingleton<AuthService>(() => AuthServiceSecuredRest());
   dependency.registerLazySingleton<UserService>(() => UserServiceRest());
+  dependency
+      .registerLazySingleton<EmotionsService>(() => EmotionsServiceRest());
 
   // dependency.registerLazySingleton<CounterService>(() => CounterServiceRest());
   // dependency.registerLazySingleton<AuthService>(() => AuthServiceRest());
@@ -39,4 +46,6 @@ void init() {
 
   // Viewmodels
   dependency.registerLazySingleton(() => UserViewmodel());
+  dependency.registerLazySingleton(() => EmotionsViewmodel());
+  dependency.registerLazySingleton(() => ListEmotionsViewmodel());
 }

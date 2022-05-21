@@ -63,6 +63,7 @@ class UnsignedInBar extends Bar {
     final _user = await Navigator.pushNamed(context, '/login');
 
     if (_user != null) {
+      print("_user");
       _viewmodel.user = _user;
     }
   }

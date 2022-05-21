@@ -37,15 +37,16 @@ class RestService {
   }
 
   Future<Map<String, String>> get _defaultHeaders async {
-    final headers = {'Content-Type': 'application/json'};
+    final headers = {"Content-Type": "application/json"};
 
     if (_session != null) {
       //_session != null if enableSession is True
       print("have session");
       final token = await _session.getToken();
-
+      print(token);
       if (token != null) {
-        headers['Authorization'] = 'Bearer $token';
+        headers["Authorization"] = "Bearer $token";
+        print("_user");
       }
     }
     return headers;
